@@ -17,6 +17,11 @@ if sys.argv[-1] == 'publish':
 readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
+requirements = ['boto==2.9.7']
+
+if sys.version_info[:2] < (2, 7):
+    requirements.append('argparse')
+    
 setup(
     name='alotofeffort',
     version=alotofeffort.__version__,
@@ -35,9 +40,7 @@ setup(
         ]
     },
     include_package_data=True,
-    install_requires=[
-        'boto == 2.9.7'
-    ],
+    install_requires=requirements,
     license="BSD",
     zip_safe=False,
     keywords='alotofeffort',
@@ -49,8 +52,6 @@ setup(
         "Programming Language :: Python :: 2",
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
     ],
     test_suite='tests',
 )
