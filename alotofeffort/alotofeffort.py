@@ -3,11 +3,6 @@
 import argparse
 import s3
 
-def open_url():
-    """ Open browser to the URL of the freshly-deployed website. """
-    s3_url = 'http://{0}.s3-website-us-east-1.amazonaws.com'.format(bucket_name)
-    webbrowser.open_new(s3_url)
-
 
 def main():
     """ Entry point for the package, as defined in setup.py. """
@@ -21,13 +16,13 @@ def main():
         help='Directory containing the HTML files for your website.'
     )
     parser.add_argument(
-        'bucket',
+        'bucket_name',
         help='Name of S3 bucket to deploy to, e.g. mybucket.'
     )
     args = parser.parse_args()
     
-    s3.setup_connection(args.bucket)
-    s3.deploy(args.www_dir)
+    # Deploy the site to S3!
+    s3.deploy(args.www_dir, args.bucket_name)
 
 
 if __name__ == '__main__':
