@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+# -*- coding: utf-8 -*-
 import os
 import sys
 
@@ -14,13 +14,13 @@ if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')
     sys.exit()
 
-readme = open('README.rst', 'rt').read()
-history = open('HISTORY.rst', 'rt').read()
+readme = open('README.rst').read()
+history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
     name='alotofeffort',
     version=alotofeffort.__version__,
-    description='Deploy static HTML sites to S3 with the simple "alotofeffort" command.',
+    description='Instantly deploy static HTML sites to S3 at the command line.',
     long_description=readme + '\n\n' + history,
     author='Audrey Roy',
     author_email='audreyr@gmail.com',
@@ -28,8 +28,15 @@ setup(
     packages=[
         'alotofeffort',
     ],
+    package_dir={'alotofeffort': 'alotofeffort'},
+    entry_points={
+        'console_scripts': [
+            'alotofeffort = alotofeffort.alotofeffort:main',
+        ]
+    },
     include_package_data=True,
     install_requires=[
+        'boto == 2.9.7'
     ],
     license="BSD",
     zip_safe=False,
