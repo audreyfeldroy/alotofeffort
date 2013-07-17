@@ -17,15 +17,18 @@ def main():
         description='Instantly deploy static HTML sites to S3 at the command line.'
     )
     parser.add_argument(
-        'www_dir', 
+        'www_dir',
         help='Directory containing the HTML files for your website.'
+    )
+    parser.add_argument(
+        'bucket',
+        help='Name of S3 bucket to deploy to, e.g. mybucket.'
     )
     args = parser.parse_args()
     
-    s3.setup_connection()
+    s3.setup_connection(args.bucket)
     s3.deploy(args.www_dir)
 
 
 if __name__ == '__main__':
     main()
-    

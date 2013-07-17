@@ -5,10 +5,17 @@ import os
 import boto
 from boto.s3.key import Key
 
+def get_bucket_name():
+    try:
+        bucket_name = os.environ.get('ALOTOFEFFORT_BUCKET')
+    except KeyError:
+        print("Please set the ALOTOFEFFORT_BUCKET environment variable.")
+    return bucket_name
+    
 def setup_connection():
     """ Set up the connection to an S3 bucket. """
     conn = boto.connect_s3()
-    bucket_name = os.environ.get('ALOTOFEFFORT_BUCKET')
+    bucket_name = get_bucket_name()
     bucket = conn.get_bucket(bucket_name)
 
 def deploy():
