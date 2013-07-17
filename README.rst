@@ -2,9 +2,10 @@
 A Lot of Effort
 =============================
 
-Deploy static HTML sites to S3 with the simple 'alotofeffort' command.
+Instantly deploy static HTML sites to S3 at the command line.
 
-** Warning: this is still an early work-in-progress. Do not use yet. **
+I created this out of frustration, after spending a lot of effort trying to
+find a PyPI package that did this without problems.
 
 Documentation
 -------------
@@ -14,10 +15,23 @@ The full documentation is at http://alotofeffort.rtfd.org.
 Quickstart
 ----------
 
-Using A Lot of Effort is easy! Install it::
+Install it::
 
     pip install alotofeffort
+    
+Configure Boto the standard way in `~/.boto`::
 
-Then use it to deploy a project::
+    [Credentials]
+    aws_access_key_id = ...
+    aws_secret_access_key = ...
 
-	$ alotofeffort your-html-project-dir
+Then use it to deploy a static HTML website to an S3 bucket::
+
+	$ alotofeffort www/ mybucket
+
+Features
+--------
+
+* Uses standard Boto configuration.
+* Prints the S3 endpoint URL after deploying.
+* Auto-configures the bucket to be a website, with all files public.
