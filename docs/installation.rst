@@ -17,7 +17,7 @@ Or, if you have virtualenvwrapper installed::
 Configure boto
 --------------
 
-Save the following in `~/.boto`:
+Save the following in `~/.boto`::
 
     [Credentials]
     aws_access_key_id = ...
