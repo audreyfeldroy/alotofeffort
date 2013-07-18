@@ -23,11 +23,11 @@ def deploy_file(root, f, bucket):
     k.key = file_path
     try:
         k.set_contents_from_filename(file_path)
+        k.set_acl('public-read')
     except socket.error:
         print("Caught socket.error while trying to upload {0}".format(file_path))
         print("Please file an issue with alotofeffort if you see this,")
         print("providing as much info as you can.")
-    k.set_acl('public-read')
     
 
 def deploy(www_dir, bucket_name):
