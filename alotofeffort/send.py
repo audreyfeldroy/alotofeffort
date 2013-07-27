@@ -65,18 +65,24 @@ def has_changed_since_last_deploy(file_path, bucket):
     :returns: True if the file has changed, else False.
     """
     
+    print("Checking if {0} has changed since last deploy.".format(file_path))
     with open(file_path) as f:
         data = f.read()
         file_md5 = hashlib.md5(data).hexdigest()
+        print("file_md5 is {0}".format(file_md5))
     
     key = bucket.get_key(file_path)
 
-    if key and key.md5:
-        print("File {0} md5 hashes: local is {1}, bucket is {2}".format(
-            file_path,
-            file_md5,
-            key.md5)
-        )
-        return file_md5 != key.md5
-    print("Key is {0}".format(key))
+    # HACK: Boto's md5 property does not work when the file hasn't been 
+    # downloaded. The etag works but will break for multi-part uploaded files.
+    # http://stackoverflow.com/questions/16872679/how-to-programmatically-
+    #     get-the-md5-checksum-of-amazon-s3-file-using-boto/17607096#17607096
+    # Also the double quotes around it must be stripped. Sketchy...boto's fault
+    key_md5 = key.etag.replace('"', '').strip()
+    print("key_md5 is {0}".format(key_md5))
+
+    if file_md5 == key_md5:
+        print("File has not changed.")
+        return False
+    print("File has changed.")
     return True

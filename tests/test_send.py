@@ -14,7 +14,6 @@ import unittest
 
 import boto
 from boto.s3.key import Key
-from moto import mock_s3
 
 from alotofeffort.send import has_changed_since_last_deploy
 
@@ -24,10 +23,9 @@ class TestSend(unittest.TestCase):
     def test_something(self):
         self.assertTrue(True)
 
-    @mock_s3
     def test_has_changed_since_last_deploy_new(self):
         conn = boto.connect_s3()
-        bucket = conn.create_bucket('test_bucket')
+        bucket = conn.create_bucket('test_bucket_alotofeffort')
     
         result = has_changed_since_last_deploy(
             file_path='tests/files/index.html',
@@ -35,10 +33,9 @@ class TestSend(unittest.TestCase):
         )
         self.assertTrue(result)
     
-    @mock_s3
     def test_has_changed_since_last_deploy_old_unchanged(self):
         conn = boto.connect_s3()
-        bucket = conn.create_bucket('test_bucket')
+        bucket = conn.create_bucket('test_bucket_alotofeffort')
         file_path='tests/files/index.html'
         
         k = Key(bucket)
