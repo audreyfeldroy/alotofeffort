@@ -8,14 +8,12 @@ import boto
 from boto.s3.key import Key
 
 
-def deploy_file(root, f, bucket):
+def deploy_file(file_path, bucket):
     """ Uploads a file to an S3 bucket, as a public file. """
 
-    # Normalize path to remove dot
     # Paths look like:
     #  index.html
     #  css/bootstrap.min.css
-    file_path = os.path.normpath(os.path.join(root, f))
 
     print("Deploying {0}".format(file_path))
 
@@ -42,7 +40,9 @@ def deploy(www_dir, bucket_name):
     os.chdir(www_dir)
     for root, dirs, files in os.walk('.'):
         for f in files:
-            deploy_file(root, f, bucket)
+            # Use full relative path. Normalize to remove dot.
+            file_path = os.path.normpath(os.path.join(root, f))
+            deploy_file(file_path, bucket)
 
     # Make the whole bucket public
     bucket.set_acl('public-read')
