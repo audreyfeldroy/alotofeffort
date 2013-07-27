@@ -36,13 +36,17 @@ def deploy(www_dir, bucket_name):
     conn = boto.connect_s3()
     bucket = conn.get_bucket(bucket_name)
 
-    # Deploy each file in www_dir
+    # Deploy each changed file in www_dir
     os.chdir(www_dir)
     for root, dirs, files in os.walk('.'):
         for f in files:
             # Use full relative path. Normalize to remove dot.
             file_path = os.path.normpath(os.path.join(root, f))
-            deploy_file(file_path, bucket)
+            
+            if has_changed_since_last_deploy(file_path, bucket):
+                deploy_file(file_path, bucket)
+            else:
+                print("Skipping {0}".format(file_path))
 
     # Make the whole bucket public
     bucket.set_acl('public-read')
@@ -65,11 +69,11 @@ def has_changed_since_last_deploy(file_path, bucket):
     :returns: True if the file has changed, else False.
     """
     
-    print("Checking if {0} has changed since last deploy.".format(file_path))
+    # print("Checking if {0} has changed since last deploy.".format(file_path))
     with open(file_path) as f:
         data = f.read()
         file_md5 = hashlib.md5(data).hexdigest()
-        print("file_md5 is {0}".format(file_md5))
+        # print("file_md5 is {0}".format(file_md5))
     
     key = bucket.get_key(file_path)
 
@@ -80,13 +84,13 @@ def has_changed_since_last_deploy(file_path, bucket):
     # Also the double quotes around it must be stripped. Sketchy...boto's fault
     if key:
         key_md5 = key.etag.replace('"', '').strip()
-        print("key_md5 is {0}".format(key_md5))
+        # print("key_md5 is {0}".format(key_md5))
     else:
-        print("File does not exist in bucket")
+        # print("File does not exist in bucket")
         return True
 
     if file_md5 == key_md5:
-        print("File has not changed.")
+        # print("File has not changed.")
         return False
-    print("File has changed.")
+    # print("File has changed.")
     return True
