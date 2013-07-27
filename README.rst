@@ -46,3 +46,6 @@ Features
 * Auto-configures the bucket to be a website, with all files public.
 * Only files that have changed get uploaded. Files are checked for changes by
   comparing the local and remote MD5 hashes of the files.
+* Never auto-deletes. In fact, it doesn't delete files at all! (In the future,
+  it will check if any files need to be deleted from S3, and prompt you before
+  deleting anything.)
