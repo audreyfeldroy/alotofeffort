@@ -3,6 +3,12 @@
 History
 -------
 
+0.3 (2013-07-27)
+++++++++++++++++++
+
+* Only files that have changed get uploaded. Files are checked for changes by
+  comparing the local and remote MD5 hashes of the files.
+
 0.2 (2013-07-17)
 ++++++++++++++++++
 
