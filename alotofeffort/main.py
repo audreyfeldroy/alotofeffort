@@ -1,11 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import argparse
-import s3
+import logging
+
+from .send import deploy
 
 
 def main():
     """ Entry point for the package, as defined in setup.py. """
+    
+    # Log info and above to console
+    logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.INFO)
     
     # Get command line input/output arguments
     parser = argparse.ArgumentParser(
@@ -22,7 +27,7 @@ def main():
     args = parser.parse_args()
     
     # Deploy the site to S3!
-    s3.deploy(args.www_dir, args.bucket_name)
+    deploy(args.www_dir, args.bucket_name)
 
 
 if __name__ == '__main__':
