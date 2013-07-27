@@ -1,12 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import argparse
+import logging
 
 from .send import deploy
 
 
 def main():
     """ Entry point for the package, as defined in setup.py. """
+    
+    # Log info and above to console
+    logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.INFO)
     
     # Get command line input/output arguments
     parser = argparse.ArgumentParser(
