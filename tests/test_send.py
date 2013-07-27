@@ -20,10 +20,10 @@ from alotofeffort.send import has_changed_since_last_deploy
 
 class TestSend(unittest.TestCase):
 
-    def test_something(self):
-        self.assertTrue(True)
-
     def test_has_changed_since_last_deploy_new(self):
+        """
+        This will only work with a real S3 account, so it's disabled in Travis CI.
+        """
         conn = boto.connect_s3()
         bucket = conn.create_bucket('test_bucket_alotofeffort')
     
@@ -32,8 +32,14 @@ class TestSend(unittest.TestCase):
             bucket=bucket
         )
         self.assertTrue(result)
+        
+        # Cleanup
+        conn.delete_bucket('test_bucket_alotofeffort')
     
     def test_has_changed_since_last_deploy_old_unchanged(self):
+        """
+        This will only work with a real S3 account, so it's disabled in Travis CI.
+        """
         conn = boto.connect_s3()
         bucket = conn.create_bucket('test_bucket_alotofeffort')
         file_path='tests/files/index.html'
@@ -47,6 +53,11 @@ class TestSend(unittest.TestCase):
             bucket=bucket
         )
         self.assertFalse(result)
+        
+        # Cleanup
+        k.delete()
+        conn.delete_bucket('test_bucket_alotofeffort')
+        
         
 if __name__ == '__main__':
     unittest.main()

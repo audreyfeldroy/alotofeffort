@@ -78,8 +78,12 @@ def has_changed_since_last_deploy(file_path, bucket):
     # http://stackoverflow.com/questions/16872679/how-to-programmatically-
     #     get-the-md5-checksum-of-amazon-s3-file-using-boto/17607096#17607096
     # Also the double quotes around it must be stripped. Sketchy...boto's fault
-    key_md5 = key.etag.replace('"', '').strip()
-    print("key_md5 is {0}".format(key_md5))
+    if key:
+        key_md5 = key.etag.replace('"', '').strip()
+        print("key_md5 is {0}".format(key_md5))
+    else:
+        print("File does not exist in bucket")
+        return True
 
     if file_md5 == key_md5:
         print("File has not changed.")
