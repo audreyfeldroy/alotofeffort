@@ -44,3 +44,5 @@ Features
 * Uses standard Boto configuration.
 * Prints the S3 endpoint URL after deploying.
 * Auto-configures the bucket to be a website, with all files public.
+* Only files that have changed get uploaded. Files are checked for changes by
+  comparing the local and remote MD5 hashes of the files.
