@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import argparse
-import s3
+
+from .send import deploy
 
 
 def main():
@@ -22,7 +23,7 @@ def main():
     args = parser.parse_args()
     
     # Deploy the site to S3!
-    s3.deploy(args.www_dir, args.bucket_name)
+    deploy(args.www_dir, args.bucket_name)
 
 
 if __name__ == '__main__':

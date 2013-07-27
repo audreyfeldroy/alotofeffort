@@ -7,7 +7,6 @@ import socket
 import boto
 from boto.s3.key import Key
 
-from IPython import embed
 
 def deploy_file(root, f, bucket):
     """ Uploads a file to an S3 bucket, as a public file. """
