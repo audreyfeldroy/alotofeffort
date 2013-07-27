@@ -6,6 +6,7 @@ import socket
 import boto
 from boto.s3.key import Key
 
+from IPython import embed
 
 def deploy_file(root, f, bucket):
     """ Uploads a file to an S3 bucket, as a public file. """
@@ -52,3 +53,27 @@ def deploy(www_dir, bucket_name):
     # Print the endpoint, so you know the URL
     print("Your website is now live at {0}".format(bucket.get_website_endpoint()))
     print("If you haven't done so yet, point your domain name there!")
+
+
+def has_changed_since_last_deploy(file_path, bucket):
+    """
+    Checks if a file has changed since the last time it was deployed.
+    
+    :param file_path: Path to file which should be checked. Should be relative
+                      from root of bucket.
+    :param bucket_name: Name of S3 bucket to check against.
+    :returns: True if the file has changed, else False.
+    """
+    
+    file_size = os.path.getsize(file_path)
+    key = bucket.get_key(file_path)
+
+    if key and key.size:
+        print("File {0}: local is size {1}, bucket is size {2}".format(
+            file_path,
+            file_size,
+            key.size)
+        )
+        return file_size != key.size
+    print("Key is {0}".format(key))
+    return True

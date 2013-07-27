@@ -36,7 +36,7 @@ setup(
     package_dir={'alotofeffort': 'alotofeffort'},
     entry_points={
         'console_scripts': [
-            'alotofeffort = alotofeffort.alotofeffort:main',
+            'alotofeffort = alotofeffort.main:main',
         ]
     },
     include_package_data=True,
