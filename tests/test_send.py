@@ -10,12 +10,17 @@ Tests for `alotofeffort.send` module.
 
 import os
 import shutil
-import unittest
+import sys
 
 import boto
 from boto.s3.key import Key
 
 from alotofeffort.send import has_changed_since_last_deploy
+
+if sys.version_info[:2] < (2, 7):
+    import unittest2 as unittest
+else:
+    import unittest
 
 
 @unittest.skip(reason='Only works with a real S3 account, which costs money.')
