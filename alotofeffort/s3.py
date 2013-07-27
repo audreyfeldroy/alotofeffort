@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import hashlib
 import os
 import socket
 
@@ -65,15 +66,18 @@ def has_changed_since_last_deploy(file_path, bucket):
     :returns: True if the file has changed, else False.
     """
     
-    file_size = os.path.getsize(file_path)
+    with open(file_path) as f:
+        data = f.read()
+        file_md5 = hashlib.md5(data).hexdigest()
+    
     key = bucket.get_key(file_path)
 
-    if key and key.size:
-        print("File {0}: local is size {1}, bucket is size {2}".format(
+    if key and key.md5:
+        print("File {0} md5 hashes: local is {1}, bucket is {2}".format(
             file_path,
-            file_size,
-            key.size)
+            file_md5,
+            key.md5)
         )
-        return file_size != key.size
+        return file_md5 != key.md5
     print("Key is {0}".format(key))
     return True
