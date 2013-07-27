@@ -20,38 +20,35 @@ from alotofeffort.send import has_changed_since_last_deploy
 
 @unittest.skip(reason='Only works with a real S3 account, which costs money.')
 class IntegrationTestSend(unittest.TestCase):
+    
+    def setUp(self):
+        self.conn = boto.connect_s3()
+        self.bucket = self.conn.create_bucket('test_bucket_alotofeffort')
+        self.file_path='tests/files/index.html'
 
     def test_has_changed_since_last_deploy_new(self):
-        conn = boto.connect_s3()
-        bucket = conn.create_bucket('test_bucket_alotofeffort')
-    
         result = has_changed_since_last_deploy(
-            file_path='tests/files/index.html',
-            bucket=bucket
+            file_path=self.file_path,
+            bucket=self.bucket
         )
         self.assertTrue(result)
-        
-        # Cleanup
-        conn.delete_bucket('test_bucket_alotofeffort')
-    
+
     def test_has_changed_since_last_deploy_old_unchanged(self):
-        conn = boto.connect_s3()
-        bucket = conn.create_bucket('test_bucket_alotofeffort')
-        file_path='tests/files/index.html'
-        
-        k = Key(bucket)
-        k.key = file_path
-        k.set_contents_from_filename(file_path)
+        k = Key(self.bucket)
+        k.key = self.file_path
+        k.set_contents_from_filename(self.file_path)
     
         result = has_changed_since_last_deploy(
-            file_path=file_path,
-            bucket=bucket
+            file_path=self.file_path,
+            bucket=self.bucket
         )
         self.assertFalse(result)
         
         # Cleanup
         k.delete()
-        conn.delete_bucket('test_bucket_alotofeffort')
+
+    def tearDown(self):
+        self.conn.delete_bucket('test_bucket_alotofeffort')
         
         
 if __name__ == '__main__':
