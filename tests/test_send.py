@@ -18,12 +18,10 @@ from boto.s3.key import Key
 from alotofeffort.send import has_changed_since_last_deploy
 
 
-class TestSend(unittest.TestCase):
+@unittest.skip(reason='Only works with a real S3 account, which costs money.')
+class IntegrationTestSend(unittest.TestCase):
 
     def test_has_changed_since_last_deploy_new(self):
-        """
-        This will only work with a real S3 account, so it's disabled in Travis CI.
-        """
         conn = boto.connect_s3()
         bucket = conn.create_bucket('test_bucket_alotofeffort')
     
@@ -37,9 +35,6 @@ class TestSend(unittest.TestCase):
         conn.delete_bucket('test_bucket_alotofeffort')
     
     def test_has_changed_since_last_deploy_old_unchanged(self):
-        """
-        This will only work with a real S3 account, so it's disabled in Travis CI.
-        """
         conn = boto.connect_s3()
         bucket = conn.create_bucket('test_bucket_alotofeffort')
         file_path='tests/files/index.html'
