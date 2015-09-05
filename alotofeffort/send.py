@@ -75,7 +75,7 @@ def has_changed_since_last_deploy(file_path, bucket):
     logger.debug("Checking if {0} has changed since last deploy.".format(file_path))
     with open(file_path) as f:
         data = f.read()
-        file_md5 = hashlib.md5(data).hexdigest()
+        file_md5 = hashlib.md5(data.encode('utf-8')).hexdigest()
         logger.debug("file_md5 is {0}".format(file_md5))
     
     key = bucket.get_key(file_path)
