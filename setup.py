@@ -17,7 +17,7 @@ if sys.argv[-1] == 'publish':
 readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
-requirements = ['boto==2.9.7']
+requirements = ['boto==2.38.0']
 
 if sys.version_info[:2] < (2, 7):
     requirements.append('argparse')
