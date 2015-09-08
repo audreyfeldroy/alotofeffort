@@ -21,11 +21,11 @@ requirements = ['boto==2.38.0']
 
 if sys.version_info[:2] < (2, 7):
     requirements.append('argparse')
-    
+
 setup(
     name='alotofeffort',
     version=alotofeffort.__version__,
-    description='Instantly deploy static HTML sites to S3 at the command line.',
+    description='Deploy static HTML sites to S3 at the command line.',
     long_description=readme + '\n\n' + history,
     author='Audrey Roy',
     author_email='audreyr@gmail.com',
