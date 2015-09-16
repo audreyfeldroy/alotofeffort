@@ -23,7 +23,7 @@ if sys.version_info[:2] < (2, 7):
 
 setup(
     name='alotofeffort',
-    version='0.4.0',
+    version='0.4.1',
     description='Deploy static HTML sites to S3 at the command line.',
     long_description=readme + '\n\n' + history,
     author='Audrey Roy',
