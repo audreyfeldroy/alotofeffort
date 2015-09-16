@@ -3,6 +3,15 @@
 History
 -------
 
+0.4.0 (2015-09-15)
+++++++++++++++++++
+
+* Upgraded boto to 2.38.0.
+* Added tox envs for Python 3.3, 3.4, 3.5.
+* PEP 8 cleanup.
+* README cleanup.
+* Improvements to setup.py.
+
 0.3 (2013-07-27)
 ++++++++++++++++++
 
