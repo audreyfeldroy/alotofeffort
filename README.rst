@@ -8,9 +8,6 @@ A Lot of Effort
 .. image:: https://travis-ci.org/audreyr/alotofeffort.png?branch=master
         :target: https://travis-ci.org/audreyr/alotofeffort
 
-.. image:: https://pypip.in/d/alotofeffort/badge.png
-        :target: https://crate.io/packages/alotofeffort?version=latest
-
 Instantly deploy static HTML sites to S3 at the command line.
 
 I created this out of frustration, after spending a lot of effort trying to
