@@ -3,7 +3,6 @@
 import os
 import sys
 
-import alotofeffort
 
 try:
     from setuptools import setup
@@ -24,7 +23,7 @@ if sys.version_info[:2] < (2, 7):
 
 setup(
     name='alotofeffort',
-    version=alotofeffort.__version__,
+    version=0.3,
     description='Deploy static HTML sites to S3 at the command line.',
     long_description=readme + '\n\n' + history,
     author='Audrey Roy',
