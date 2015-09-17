@@ -28,8 +28,10 @@ def deploy_file(file_path, bucket):
         k.set_contents_from_filename(file_path)
         k.set_acl('public-read')
     except socket.error:
-        logger.warning("Caught socket.error while trying to upload {0}".format(file_path))
-        logger.warning("Please file an issue with alotofeffort if you see this,")
+        logger.warning("Caught socket.error while trying to upload {0}".format(
+            file_path))
+        msg = "Please file an issue with alotofeffort if you see this,"
+        logger.warning(msg)
         logger.warning("providing as much info as you can.")
 
 
@@ -59,7 +61,9 @@ def deploy(www_dir, bucket_name):
     bucket.configure_website('index.html', 'error.html')
 
     # Print the endpoint, so you know the URL
-    logger.info("Your website is now live at {0}".format(bucket.get_website_endpoint()))
+    msg = "Your website is now live at {0}".format(
+        bucket.get_website_endpoint())
+    logger.info(msg)
     logger.info("If you haven't done so yet, point your domain name there!")
 
 
@@ -73,7 +77,8 @@ def has_changed_since_last_deploy(file_path, bucket):
     :returns: True if the file has changed, else False.
     """
 
-    logger.debug("Checking if {0} has changed since last deploy.".format(file_path))
+    msg = "Checking if {0} has changed since last deploy.".format(file_path)
+    logger.debug(msg)
     with open(file_path) as f:
         data = f.read()
         file_md5 = hashlib.md5(data.encode('utf-8')).hexdigest()

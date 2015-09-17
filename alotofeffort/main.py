@@ -10,12 +10,12 @@ def main():
     """ Entry point for the package, as defined in setup.py. """
 
     # Log info and above to console
-    logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.INFO)
+    logging.basicConfig(
+        format='%(levelname)s: %(message)s', level=logging.INFO)
 
     # Get command line input/output arguments
-    parser = argparse.ArgumentParser(
-        description='Instantly deploy static HTML sites to S3 at the command line.'
-    )
+    msg = 'Instantly deploy static HTML sites to S3 at the command line.'
+    parser = argparse.ArgumentParser(description=msg)
     parser.add_argument(
         'www_dir',
         help='Directory containing the HTML files for your website.'
