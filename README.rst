@@ -4,9 +4,19 @@ A Lot of Effort
 
 .. image:: https://badge.fury.io/py/alotofeffort.png
     :target: http://badge.fury.io/py/alotofeffort
-    
+
 .. image:: https://travis-ci.org/audreyr/alotofeffort.png?branch=master
         :target: https://travis-ci.org/audreyr/alotofeffort
+
+.. image:: https://img.shields.io/pypi/v/alotofeffort.svg?style=flat
+        :target: https://pypi.python.org/pypi/alotofeffort
+
+.. image:: https://img.shields.io/travis/audreyr/alotofeffort.svg
+        :target: https://travis-ci.org/audreyr/alotofeffort
+
+.. image:: https://img.shields.io/pypi/pyversions/alotofeffort.svg?style=flat
+
+.. image:: https://img.shields.io/pypi/status/alotofeffort.svg?style=flat        
 
 Instantly deploy static HTML sites to S3 at the command line.
 
@@ -24,7 +34,7 @@ Quickstart
 Install it::
 
     pip install alotofeffort
-    
+
 Configure Boto the standard way in `~/.boto`::
 
     [Credentials]
