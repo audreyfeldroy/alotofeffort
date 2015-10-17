@@ -12,9 +12,7 @@ A Lot of Effort
         :target: https://pypi.python.org/pypi/alotofeffort
 
 .. image:: https://img.shields.io/travis/audreyr/alotofeffort.svg
-        :target: https://travis-ci.org/audreyr/alotofeffort
-
-.. image:: https://img.shields.io/pypi/pyversions/alotofeffort.svg?style=flat       
+        :target: https://travis-ci.org/audreyr/alotofeffort       
 
 Instantly deploy static HTML sites to S3 at the command line.
 
