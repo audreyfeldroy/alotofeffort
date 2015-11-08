@@ -1,4 +1,8 @@
 # Config file for automatic testing at travis-ci.org
+
+# Needed to use Travis' container-based infrastructure
+sudo: false
+
 language: python
 
 python: 3.5
