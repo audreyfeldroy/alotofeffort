@@ -16,7 +16,7 @@ find a PyPI package that did this without problems.
 Documentation
 -------------
 
-The full documentation is at http://alotofeffort.rtfd.org.
+The full documentation is at https://alotofeffort.readthedocs.io.
 
 Quickstart
 ----------
